@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, BackHandler } from "react-native";
 import EntryHeader from "./EntryHeader";
 import EntryItem from "./EntryItem";
 import EntryAdd from "./EntryAdd";
@@ -7,6 +7,14 @@ import ScrollContent from "./ScrollContent";
 import Header from "./Header";
 
 const RentMenu = () => {
+  // Disable back button
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => true);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", () => true);
+  }, []);
+
   const defaultState = {
     id: Math.random(Math.floor(1 + 100) * 100 - 1),
     name: "Gaivota",
@@ -14,8 +22,8 @@ const RentMenu = () => {
     bookings: [
       {
         time: {
-          hours: new Date().getHours(),
-          minutes: new Date().getMinutes(),
+          hours: new Date().getHours().toString(),
+          minutes: new Date().getMinutes().toString(),
         },
         duration: "1",
       },
@@ -28,9 +36,44 @@ const RentMenu = () => {
     });
   };
 
+  const addNewBooking = (index) => {
+    let newState = [...items];
+    newState[index].bookings.push({
+      time: {
+        hours: new Date().getHours().toString(),
+        minutes: new Date().getMinutes().toString(),
+      },
+      duration: "1",
+    });
+
+    updateItems(newState);
+  };
+
   const updateItemName = (name, index) => {
     let newState = [...items];
     newState[index].name = name;
+    updateItems(newState);
+  };
+
+  const cancelItemEntry = (index, bookingIndex) => {
+    let newState = [...items];
+    newState[index].bookings.splice(bookingIndex, 1);
+    updateItems(newState);
+  };
+
+  const updateItemDuration = (duration, itemIndex, bookingIndex) => {
+    let newState = [...items];
+    newState[itemIndex].bookings[bookingIndex].duration = duration;
+    updateItems(newState);
+  };
+  const updateItemHour = (hours, itemIndex, bookingIndex) => {
+    let newState = [...items];
+    newState[itemIndex].bookings[bookingIndex].time.hours = hours;
+    updateItems(newState);
+  };
+  const updateItemMinute = (minutes, itemIndex, bookingIndex) => {
+    let newState = [...items];
+    newState[itemIndex].bookings[bookingIndex].time.minutes = minutes;
     updateItems(newState);
   };
 
@@ -46,10 +89,10 @@ const RentMenu = () => {
             index={index}
             updateName={updateItemName}
           >
-            {renderBookings(item.bookings)}
+            {renderBookings(item.bookings, index)}
           </EntryHeader>
-          <View style={{ width: "100%", alignItems: "center" }}>
-            <EntryAdd></EntryAdd>
+          <View style={styles.buttonNewEntry}>
+            <EntryAdd index={index} addNewBooking={addNewBooking}></EntryAdd>
           </View>
         </View>
       );
@@ -58,9 +101,20 @@ const RentMenu = () => {
 
   // Renderizar os bookings
 
-  const renderBookings = (bookings) => {
+  const renderBookings = (bookings, itemIndex) => {
     return bookings.map((book, index) => {
-      return <EntryItem key={index} index={index} book={book}></EntryItem>;
+      return (
+        <EntryItem
+          key={index}
+          itemIndex={itemIndex}
+          bookingIndex={index}
+          book={book}
+          updateDuration={updateItemDuration}
+          updateHour={updateItemHour}
+          updateMinute={updateItemMinute}
+          cancelEntry={cancelItemEntry}
+        ></EntryItem>
+      );
     });
   };
 
@@ -78,6 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: "Roboto_400Regular",
   },
+  buttonNewEntry: { width: "100%", alignItems: "center", marginTop: 10 },
 });
 
 export default RentMenu;

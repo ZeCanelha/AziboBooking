@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const EntryAdd = (props) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => props.addNewBooking(props.index)}>
       <Text style={styles.textAddNew}>Nova entrada</Text>
     </TouchableOpacity>
   );
