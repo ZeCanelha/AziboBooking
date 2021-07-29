@@ -1,21 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import {
+  useFonts,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
+import AppLoading from "expo-app-loading";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import MainMenu from "./components/MainMenu/MainMenu";
+import RentMenu from "./components/RegistMenu/RentMenu";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+  });
+
+  const Stack = createStackNavigator();
+
+  if (!fontsLoaded) {
+    return <AppLoading></AppLoading>;
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="MainScreen"
+            options={{ headerShown: false }}
+            component={MainMenu}
+          />
+          <Stack.Screen
+            name="RentScreen"
+            options={{ headerShown: false }}
+            component={RentMenu}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontFamily: "Roboto_400Regular",
   },
 });
