@@ -21,6 +21,11 @@ function storeReducer(state = initialState, action) {
       newState.rentItems[action.payload.index].name = action.payload.name;
       return newState;
     }
+    case "UPDATE_ITEM_PRICE": {
+      let newState = { ...state };
+      newState.rentItems[action.payload.index].price = action.payload.price;
+      return newState;
+    }
     case "CANCEL_ITEM_ENTRY": {
       let newState = { ...state };
       newState.rentItems[action.payload.index].bookings.splice(
@@ -55,7 +60,7 @@ function storeReducer(state = initialState, action) {
       return initialState;
     }
     case "NEW_REGIST": {
-      return { ...state, seessionActive };
+      return { ...state, seessionActive: true };
     }
 
     default:

@@ -2,7 +2,7 @@ export function addNewItem() {
   const defaultState = {
     id: Math.random(Math.floor(1 + 100) * 100 - 1),
     name: "Gaivota",
-    price: 10,
+    price: "10",
     bookings: [
       {
         time: {
@@ -39,6 +39,12 @@ export function updateItemName(index, name) {
   return {
     type: "UPDATE_ITEM_NAME",
     payload: { index, name },
+  };
+}
+export function updateItemPrice(index, price) {
+  return {
+    type: "UPDATE_ITEM_PRICE",
+    payload: { index, price },
   };
 }
 

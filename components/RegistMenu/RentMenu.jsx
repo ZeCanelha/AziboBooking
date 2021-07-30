@@ -9,17 +9,7 @@ import Header from "./Header";
 
 import { AppContext } from "../../data/Store";
 
-const RentMenu = () => {
-  // Disable back button
-
-  // useEffect(() => {
-  //   BackHandler.addEventListener("hardwareBackPress", () => true);
-  //   return () =>
-  //     BackHandler.removeEventListener("hardwareBackPress", () => true);
-  // }, []);
-
-  // Importar o contexto: estado actual e o dispatch
-
+const RentMenu = ({ navigation }) => {
   const { state, dispatch } = useContext(AppContext);
 
   // Renderizar os barcos alugados + titulo
@@ -28,11 +18,16 @@ const RentMenu = () => {
     return state.rentItems.map((item, index) => {
       return (
         <View key={item.id}>
-          <EntryHeader name={item.name} index={index} updateName={dispatch}>
+          <EntryHeader
+            name={item.name}
+            price={item.price}
+            index={index}
+            dispatch={dispatch}
+          >
             {renderBookings(item.bookings, index)}
           </EntryHeader>
           <View style={styles.buttonNewEntry}>
-            <EntryAdd index={index} addNewBooking={dispatch}></EntryAdd>
+            <EntryAdd index={index} dispatch={dispatch}></EntryAdd>
           </View>
         </View>
       );
@@ -58,7 +53,9 @@ const RentMenu = () => {
   return (
     <View style={styles.container}>
       <Header></Header>
-      <ScrollContent addItem={dispatch}>{renderItems()}</ScrollContent>
+      <ScrollContent navigation={navigation} dispatch={dispatch}>
+        {renderItems()}
+      </ScrollContent>
     </View>
   );
 };

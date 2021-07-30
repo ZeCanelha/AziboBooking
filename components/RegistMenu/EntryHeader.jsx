@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 
-import { updateItemName } from "../../data/actions/rentActions";
+import {
+  updateItemName,
+  updateItemPrice,
+} from "../../data/actions/rentActions";
 
 const EntryHeader = (props) => {
-  // const [name, updateName] = useState(props.name);
-
   const onNameChange = (name) => {
-    props.updateName(updateItemName(props.index, name));
+    props.dispatch(updateItemName(props.index, name));
+  };
+
+  const onPriceChange = (price) => {
+    props.dispatch(updateItemPrice(props.index, price));
   };
 
   return (
@@ -18,6 +23,15 @@ const EntryHeader = (props) => {
           style={styles.titleText}
           value={props.name}
         ></TextInput>
+        <View style={styles.rowContainer}>
+          <TextInput
+            onChangeText={(price) => onPriceChange(price)}
+            style={styles.titleText}
+            value={props.price}
+            keyboardType="numeric"
+          ></TextInput>
+          <Text style={styles.titleText}>€</Text>
+        </View>
       </View>
       <View style={styles.headerContainer}>
         <Text style={styles.textHeader}>Nº Saída</Text>
@@ -54,6 +68,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   iconeStyle: {
     width: 15,

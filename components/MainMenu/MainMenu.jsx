@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import {
   Text,
@@ -8,7 +8,17 @@ import {
   ImageBackground,
 } from "react-native";
 
+import { AppContext } from "../../data/Store";
+import { newRegist } from "../../data/actions/rentActions";
+
 const MainMenu = ({ navigation }) => {
+  const { state, dispatch } = useContext(AppContext);
+
+  const navigateToRentScreen = () => {
+    dispatch(newRegist());
+    navigation.navigate("RentScreen");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -24,9 +34,11 @@ const MainMenu = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("RentScreen")}
+          onPress={() => navigateToRentScreen()}
         >
-          <Text style={styles.text}>Novo Registo</Text>
+          <Text style={styles.text}>
+            {state.sessionActive ? "Continuar" : "Registo"}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

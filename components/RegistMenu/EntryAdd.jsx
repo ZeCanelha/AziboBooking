@@ -5,7 +5,7 @@ import { addNewBooking } from "../../data/actions/rentActions";
 const EntryAdd = (props) => {
   return (
     <TouchableOpacity
-      onPress={() => props.addNewBooking(addNewBooking(props.index))}
+      onPress={() => props.dispatch(addNewBooking(props.index))}
     >
       <Text style={styles.textAddNew}>Nova entrada</Text>
     </TouchableOpacity>

@@ -12,7 +12,7 @@ const EntryContent = (props) => {
         style={styles.textInput}
       ></TextInput>
       {props.children}
-      <ItemAdd addItem={props.addItem}></ItemAdd>
+      <ItemAdd {...props}></ItemAdd>
     </ScrollView>
   );
 };
