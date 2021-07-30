@@ -14,6 +14,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MainMenu from "./components/MainMenu/MainMenu";
 import RentMenu from "./components/RegistMenu/RentMenu";
 
+import Store from "./data/Store";
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -27,20 +29,22 @@ export default function App() {
     return <AppLoading></AppLoading>;
   } else {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="MainScreen"
-            options={{ headerShown: false }}
-            component={MainMenu}
-          />
-          <Stack.Screen
-            name="RentScreen"
-            options={{ headerShown: false }}
-            component={RentMenu}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Store>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="MainScreen"
+              options={{ headerShown: false }}
+              component={MainMenu}
+            />
+            <Stack.Screen
+              name="RentScreen"
+              options={{ headerShown: false }}
+              component={RentMenu}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Store>
     );
   }
 }

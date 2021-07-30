@@ -9,28 +9,31 @@ import {
   Alert,
 } from "react-native";
 
+import {
+  cancelItemEntry as cancel,
+  updateItemDuration,
+  updateItemMinute,
+  updateItemHour,
+} from "../../data/actions/rentActions";
 const Item = ({
   book,
   bookingIndex,
   itemIndex,
-  updateDuration,
-  updateHour,
-  updateMinute,
-  cancelEntry,
+
+  dispatch,
 }) => {
   const updateNewDuration = (duration) => {
-    updateDuration(duration, itemIndex, bookingIndex);
+    dispatch(updateItemDuration(duration, itemIndex, bookingIndex));
   };
   const updateNewHour = (hour) => {
-    console.log("??");
-    updateHour(hour, itemIndex, bookingIndex);
+    dispatch(updateItemHour(hour, itemIndex, bookingIndex));
   };
   const updateNewMinute = (minute) => {
-    updateMinute(minute, itemIndex, bookingIndex);
+    dispatch(updateItemMinute(minute, itemIndex, bookingIndex));
   };
 
   const cancelItemEntry = () => {
-    cancelEntry(itemIndex, bookingIndex);
+    dispatch(cancel(itemIndex, bookingIndex));
     setModalVisible(!modalVisible);
   };
 

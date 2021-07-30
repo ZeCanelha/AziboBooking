@@ -1,98 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, BackHandler } from "react-native";
+
 import EntryHeader from "./EntryHeader";
 import EntryItem from "./EntryItem";
 import EntryAdd from "./EntryAdd";
 import ScrollContent from "./ScrollContent";
 import Header from "./Header";
 
+import { AppContext } from "../../data/Store";
+
 const RentMenu = () => {
   // Disable back button
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => true);
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", () => true);
-  }, []);
+  // useEffect(() => {
+  //   BackHandler.addEventListener("hardwareBackPress", () => true);
+  //   return () =>
+  //     BackHandler.removeEventListener("hardwareBackPress", () => true);
+  // }, []);
 
-  const defaultState = {
-    id: Math.random(Math.floor(1 + 100) * 100 - 1),
-    name: "Gaivota",
-    price: 10,
-    bookings: [
-      {
-        time: {
-          hours: new Date().getHours().toString(),
-          minutes: new Date().getMinutes().toString(),
-        },
-        duration: "1",
-      },
-    ],
-  };
+  // Importar o contexto: estado actual e o dispatch
 
-  const addNewItem = () => {
-    updateItems((prevItems) => {
-      return [...prevItems, defaultState];
-    });
-  };
-
-  const addNewBooking = (index) => {
-    let newState = [...items];
-    newState[index].bookings.push({
-      time: {
-        hours: new Date().getHours().toString(),
-        minutes: new Date().getMinutes().toString(),
-      },
-      duration: "1",
-    });
-
-    updateItems(newState);
-  };
-
-  const updateItemName = (name, index) => {
-    let newState = [...items];
-    newState[index].name = name;
-    updateItems(newState);
-  };
-
-  const cancelItemEntry = (index, bookingIndex) => {
-    let newState = [...items];
-    newState[index].bookings.splice(bookingIndex, 1);
-    updateItems(newState);
-  };
-
-  const updateItemDuration = (duration, itemIndex, bookingIndex) => {
-    let newState = [...items];
-    newState[itemIndex].bookings[bookingIndex].duration = duration;
-    updateItems(newState);
-  };
-  const updateItemHour = (hours, itemIndex, bookingIndex) => {
-    let newState = [...items];
-    newState[itemIndex].bookings[bookingIndex].time.hours = hours;
-    updateItems(newState);
-  };
-  const updateItemMinute = (minutes, itemIndex, bookingIndex) => {
-    let newState = [...items];
-    newState[itemIndex].bookings[bookingIndex].time.minutes = minutes;
-    updateItems(newState);
-  };
-
-  const [items, updateItems] = useState([]);
+  const { state, dispatch } = useContext(AppContext);
 
   // Renderizar os barcos alugados + titulo
   const renderItems = () => {
-    return items.map((item, index) => {
+    console.log(state);
+    return state.rentItems.map((item, index) => {
       return (
         <View key={item.id}>
-          <EntryHeader
-            name={item.name}
-            index={index}
-            updateName={updateItemName}
-          >
+          <EntryHeader name={item.name} index={index} updateName={dispatch}>
             {renderBookings(item.bookings, index)}
           </EntryHeader>
           <View style={styles.buttonNewEntry}>
-            <EntryAdd index={index} addNewBooking={addNewBooking}></EntryAdd>
+            <EntryAdd index={index} addNewBooking={dispatch}></EntryAdd>
           </View>
         </View>
       );
@@ -109,10 +49,7 @@ const RentMenu = () => {
           itemIndex={itemIndex}
           bookingIndex={index}
           book={book}
-          updateDuration={updateItemDuration}
-          updateHour={updateItemHour}
-          updateMinute={updateItemMinute}
-          cancelEntry={cancelItemEntry}
+          dispatch={dispatch}
         ></EntryItem>
       );
     });
@@ -121,7 +58,7 @@ const RentMenu = () => {
   return (
     <View style={styles.container}>
       <Header></Header>
-      <ScrollContent addItem={addNewItem}>{renderItems()}</ScrollContent>
+      <ScrollContent addItem={dispatch}>{renderItems()}</ScrollContent>
     </View>
   );
 };

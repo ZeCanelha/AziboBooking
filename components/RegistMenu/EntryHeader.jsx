@@ -1,18 +1,13 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  TextInput,
-} from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
+
+import { updateItemName } from "../../data/actions/rentActions";
 
 const EntryHeader = (props) => {
   // const [name, updateName] = useState(props.name);
 
   const onNameChange = (name) => {
-    props.updateName(name, props.index);
+    props.updateName(updateItemName(props.index, name));
   };
 
   return (

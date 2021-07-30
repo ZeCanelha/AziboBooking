@@ -2,10 +2,12 @@ import React from "react";
 
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
+import { addNewItem } from "../../data/actions/rentActions";
+
 const ItemAdd = (props) => {
   return (
     <View style={styles.itemAddContainer}>
-      <TouchableOpacity onPress={() => props.addItem()}>
+      <TouchableOpacity onPress={() => props.addItem(addNewItem())}>
         <Text style={styles.itemAddText}>Adicionar Gaivota</Text>
       </TouchableOpacity>
       <TouchableOpacity>

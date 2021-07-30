@@ -1,9 +1,12 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
+import { addNewBooking } from "../../data/actions/rentActions";
 const EntryAdd = (props) => {
   return (
-    <TouchableOpacity onPress={() => props.addNewBooking(props.index)}>
+    <TouchableOpacity
+      onPress={() => props.addNewBooking(addNewBooking(props.index))}
+    >
       <Text style={styles.textAddNew}>Nova entrada</Text>
     </TouchableOpacity>
   );
