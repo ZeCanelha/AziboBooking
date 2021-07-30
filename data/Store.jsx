@@ -1,9 +1,8 @@
 import React, { useReducer } from "react";
 
-const initialState = {
-  rentItems: [],
-  seessionActive: false,
-};
+import { predefinedState } from "./predefinedState";
+
+const initialState = predefinedState;
 
 function storeReducer(state = initialState, action) {
   switch (action.type) {

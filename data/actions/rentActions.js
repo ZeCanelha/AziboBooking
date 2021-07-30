@@ -3,15 +3,7 @@ export function addNewItem() {
     id: Math.random(Math.floor(1 + 100) * 100 - 1),
     name: "Gaivota",
     price: "10",
-    bookings: [
-      {
-        time: {
-          hours: new Date().getHours().toString(),
-          minutes: new Date().getMinutes().toString(),
-        },
-        duration: "1",
-      },
-    ],
+    bookings: [],
   };
 
   return {
