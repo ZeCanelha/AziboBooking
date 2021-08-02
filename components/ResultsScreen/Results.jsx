@@ -52,8 +52,8 @@ const Results = ({ navigation }) => {
   };
 
   const navigateAndClear = () => {
-    navigation.navigate("MainScreen");
     dispatch(cancelRegist());
+    navigation.navigate("MainScreen");
   };
 
   return (
