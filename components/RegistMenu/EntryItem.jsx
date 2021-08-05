@@ -37,8 +37,22 @@ const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
     setModalVisible(!modalVisible);
   };
 
+  const displayHours = (hours, minutes, duration) => {
+    if (duration < 1 || duration == "30") {
+      const durationInMinutes = 30;
+      if (minutes + durationInMinutes > 60) {
+        return `${parseInt(hours) + 1}:${
+          (parseInt(minutes) + durationInMinutes) % 60
+        } `;
+      }
+    } else {
+      return `${(parseInt(hours) || 0) + (parseInt(duration) || 0)}:${minutes}`;
+    }
+  };
+
   const [modalVisible, setModalVisible] = useState(false);
 
+  displayHours(book.time.hours, book.time.minutes, book.duration);
   return (
     <View style={{ alignItems: "center" }}>
       <Modal
@@ -115,10 +129,7 @@ const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
           </View>
           <View style={styles.inputSize}>
             <Text style={[styles.inputText, styles.textStyle]}>
-              {`${
-                (parseInt(book.time.hours) || 0) +
-                (parseInt(book.duration) || 0)
-              }:${book.time.minutes}`}
+              {displayHours(book.time.hours, book.time.minutes, book.duration)}
             </Text>
           </View>
 

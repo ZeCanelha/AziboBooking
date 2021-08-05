@@ -26,7 +26,7 @@ const RentMenu = ({ navigation }) => {
             {renderBookings(item.bookings, index)}
           </EntryHeader>
           <View style={styles.buttonNewEntry}>
-            <EntryAdd index={index} dispatch={dispatch}></EntryAdd>
+            <EntryAdd index={index}></EntryAdd>
           </View>
         </View>
       );
@@ -54,9 +54,7 @@ const RentMenu = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header navigation={navigation} dispatch={dispatch}></Header>
-      <ScrollContent navigation={navigation} dispatch={dispatch}>
-        {renderItems()}
-      </ScrollContent>
+      <ScrollContent navigation={navigation}>{renderItems()}</ScrollContent>
     </View>
   );
 };

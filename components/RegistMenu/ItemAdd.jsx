@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   View,
@@ -9,12 +9,15 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-
 import { addNewItem, cancelRegist } from "../../data/actions/rentActions";
 
+import { AppContext } from "../../data/Store";
+
 const ItemAdd = (props) => {
+  const { dispatch } = useContext(AppContext);
+
   const cancelRegistAndNavigateHome = () => {
-    props.dispatch(cancelRegist());
+    dispatch(cancelRegist());
     setModalVisible(!modalVisible);
     props.navigation.navigate("MainScreen");
   };
@@ -51,7 +54,7 @@ const ItemAdd = (props) => {
         </View>
       </Modal>
       <View style={styles.itemAddContainer}>
-        <TouchableOpacity onPress={() => props.dispatch(addNewItem())}>
+        <TouchableOpacity onPress={() => dispatch(addNewItem())}>
           <Text style={styles.itemAddText}>Adicionar Gaivota</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
