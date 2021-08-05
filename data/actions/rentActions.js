@@ -74,9 +74,10 @@ export function updateItemStatus(itemIndex, bookingIndex) {
 }
 
 export function cancelRegist() {
-  console.log("called");
+  const state = { ...defaultState };
   return {
     type: "CANCEL_REGIST",
+    payload: state,
   };
 }
 

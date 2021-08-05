@@ -63,8 +63,7 @@ function storeReducer(state, action) {
       return newState;
     }
     case "CANCEL_REGIST": {
-      console.log(predefinedState);
-      return initialState;
+      return (state = initialState);
     }
     case "NEW_REGIST": {
       return { ...state, seessionActive: true };
