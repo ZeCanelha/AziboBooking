@@ -37,6 +37,7 @@ const RentMenu = ({ navigation }) => {
 
   const renderBookings = (bookings, itemIndex) => {
     return bookings.map((book, index) => {
+      // if (!book.completed) {
       return (
         <EntryItem
           key={index}
@@ -46,6 +47,7 @@ const RentMenu = ({ navigation }) => {
           dispatch={dispatch}
         ></EntryItem>
       );
+      // }
     });
   };
 

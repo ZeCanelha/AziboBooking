@@ -14,6 +14,7 @@ export function addNewItem() {
 
 export function addNewBooking(index) {
   const booking = {
+    completed: false,
     time: {
       hours: new Date().getHours().toString(),
       minutes: new Date().getMinutes().toString(),
@@ -65,8 +66,15 @@ export function updateItemMinute(minutes, itemIndex, bookingIndex) {
     payload: { minutes, itemIndex, bookingIndex },
   };
 }
+export function updateItemStatus(itemIndex, bookingIndex) {
+  return {
+    type: "UPDATE_ITEM_STATUS",
+    payload: { itemIndex, bookingIndex },
+  };
+}
 
 export function cancelRegist() {
+  console.log("called");
   return {
     type: "CANCEL_REGIST",
   };

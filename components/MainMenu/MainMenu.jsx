@@ -14,6 +14,10 @@ import { newRegist } from "../../data/actions/rentActions";
 const MainMenu = ({ navigation }) => {
   const { state, dispatch } = useContext(AppContext);
 
+  const navigateToLoginScreen = () => {
+    navigation.navigate("LoginScreen");
+  };
+
   const navigateToRentScreen = () => {
     dispatch(newRegist());
     navigation.navigate("RentScreen");
@@ -29,7 +33,10 @@ const MainMenu = ({ navigation }) => {
         ></ImageBackground>
       </View>
       <View style={styles.navigationContainer}>
-        <TouchableOpacity style={[styles.button, styles.buttonInverse]}>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonInverse]}
+          onPress={() => navigateToLoginScreen()}
+        >
           <Text style={[styles.text, styles.textInverse]}>Histórico</Text>
         </TouchableOpacity>
         <TouchableOpacity

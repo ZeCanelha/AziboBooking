@@ -8,12 +8,15 @@ import {
   Pressable,
 } from "react-native";
 
+import { cancelRegist } from "../../data/actions/rentActions";
+
 const Header = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const concludeAndNavigate = () => {
     setModalVisible(!modalVisible);
-    props.navigation.navigate("ResultsScreen");
+    props.dispatch(cancelRegist());
+    props.navigation.navigate("MainScreen");
   };
 
   return (
@@ -71,8 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingHorizontal: 5,
     borderBottomWidth: 2,
     borderColor: "#486B73",
   },

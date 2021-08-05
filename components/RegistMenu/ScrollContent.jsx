@@ -20,10 +20,8 @@ const EntryContent = (props) => {
 const styles = StyleSheet.create({
   bodyContainer: {
     flex: 1,
-    paddingRight: 10,
-    paddingLeft: 10,
-    marginBottom: 20,
-    marginTop: 20,
+    paddingHorizontal: 5,
+    marginHorizontal: 5,
   },
   noteTitle: {
     color: "#486B73",

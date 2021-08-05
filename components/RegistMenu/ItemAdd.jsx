@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Modal,
   Pressable,
+  Alert,
 } from "react-native";
 
 import { addNewItem, cancelRegist } from "../../data/actions/rentActions";

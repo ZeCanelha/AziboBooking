@@ -34,10 +34,11 @@ const EntryHeader = (props) => {
         </View>
       </View>
       <View style={styles.headerContainer}>
-        <Text style={styles.textHeader}>Nº Saída</Text>
-        <Text style={styles.textHeader}>Hora de saida</Text>
+        {/* <Text style={styles.textHeader}>Nº Saída</Text> */}
+        <Text style={styles.textHeader}>Saída</Text>
         <Text style={styles.textHeader}>Duração</Text>
-        <Text style={styles.textHeader}>Hora de Chegada</Text>
+        <Text style={styles.textHeader}>Chegada</Text>
+        <Text style={styles.textHeader}>Concluído</Text>
       </View>
       <View>{props.children}</View>
     </View>
@@ -54,15 +55,18 @@ const styles = StyleSheet.create({
   textHeader: {
     textTransform: "uppercase",
     color: "#3CA7E2",
-    letterSpacing: 2,
+    letterSpacing: 1,
     fontFamily: "Roboto_700Bold",
     fontSize: 12,
     textAlign: "center",
-    width: "25%",
+    flexBasis: "20%",
+    flexShrink: 1,
+    flexGrow: 1,
   },
   headerContainer: {
     flexDirection: "row",
-
+    justifyContent: "space-between",
+    flex: 1,
     marginTop: 10,
   },
   rowContainer: {

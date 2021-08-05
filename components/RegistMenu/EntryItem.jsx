@@ -9,19 +9,16 @@ import {
   Alert,
 } from "react-native";
 
+import { Checkbox } from "react-native-paper";
+
 import {
   cancelItemEntry as cancel,
   updateItemDuration,
   updateItemMinute,
   updateItemHour,
+  updateItemStatus,
 } from "../../data/actions/rentActions";
-const Item = ({
-  book,
-  bookingIndex,
-  itemIndex,
-
-  dispatch,
-}) => {
+const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
   const updateNewDuration = (duration) => {
     dispatch(updateItemDuration(duration, itemIndex, bookingIndex));
   };
@@ -30,6 +27,9 @@ const Item = ({
   };
   const updateNewMinute = (minute) => {
     dispatch(updateItemMinute(minute, itemIndex, bookingIndex));
+  };
+  const updateNewStatus = () => {
+    dispatch(updateItemStatus(itemIndex, bookingIndex));
   };
 
   const cancelItemEntry = () => {
@@ -68,14 +68,18 @@ const Item = ({
           </View>
         </View>
       </Modal>
-      <Pressable onLongPress={() => setModalVisible(!modalVisible)}>
+      <Pressable
+        style={{ flexDirection: "row" }}
+        onLongPress={() => setModalVisible(!modalVisible)}
+      >
         <View style={styles.itemContainer}>
-          <Text style={[styles.inputText, styles.textStyle]}>
+          {/* <Text style={[styles.inputText, styles.textStyle]}>
             {bookingIndex + 1}
-          </Text>
+          </Text> */}
           <View
             style={[
               styles.inputText,
+              styles.inputSize,
               { flexDirection: "row", justifyContent: "space-around" },
             ]}
           >
@@ -95,22 +99,41 @@ const Item = ({
               keyboardType="numeric"
             ></TextInput>
           </View>
-          <TextInput
-            maxLength={1}
+          <View
             style={[
-              styles.inputText__editable,
-              styles.inputText,
-              styles.textStyle,
+              styles.inputSize,
+              { flexDirection: "row", justifyContent: "space-around" },
             ]}
-            keyboardType="numeric"
-            value={book.duration}
-            onChangeText={(duration) => updateNewDuration(duration)}
-          ></TextInput>
-          <Text style={[styles.inputText, styles.textStyle]}>
-            {`${
-              (parseInt(book.time.hours) || 0) + (parseInt(book.duration) || 0)
-            }:${book.time.minutes}`}
-          </Text>
+          >
+            <TextInput
+              maxLength={3}
+              style={[styles.inputText__editable, styles.textStyle]}
+              keyboardType="numeric"
+              value={book.duration}
+              onChangeText={(duration) => updateNewDuration(duration)}
+            ></TextInput>
+          </View>
+          <View style={styles.inputSize}>
+            <Text style={[styles.inputText, styles.textStyle]}>
+              {`${
+                (parseInt(book.time.hours) || 0) +
+                (parseInt(book.duration) || 0)
+              }:${book.time.minutes}`}
+            </Text>
+          </View>
+
+          <View
+            style={[
+              styles.inputSize,
+              { flexDirection: "row", justifyContent: "space-around" },
+            ]}
+          >
+            <Checkbox
+              status={book.completed ? "checked" : "unchecked"}
+              color="#486B73"
+              onPress={() => updateNewStatus()}
+            ></Checkbox>
+          </View>
         </View>
       </Pressable>
     </View>
@@ -123,22 +146,25 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   itemContainer: {
-    width: "100%",
     flexDirection: "row",
+    flex: 1,
     justifyContent: "space-between",
-    padding: 5,
-    marginLeft: "2.5%",
+    alignItems: "center",
+  },
+  inputSize: {
+    flexBasis: "20%",
+    flexShrink: 1,
+    flexGrow: 1,
+    marginHorizontal: 5,
   },
   inputText: {
-    width: "22.5%",
     textAlign: "center",
   },
-
   inputText__editable: {
     backgroundColor: "#C1CECF9E",
     borderRadius: 5,
-    width: "45%",
     textAlign: "center",
+    flexGrow: 1,
   },
   textStyle: {
     fontFamily: "Roboto_700Bold",

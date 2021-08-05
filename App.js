@@ -13,7 +13,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import MainMenu from "./components/MainMenu/MainMenu";
 import RentMenu from "./components/RegistMenu/RentMenu";
-import Results from "./components/ResultsScreen/Results";
+import CardScreen from "./components/AdminScreen/Card";
+import Login from "./components/LoginScreen/Login";
+import Dashboard from "./components/AdminScreen/Dashboard";
 
 import Store from "./data/Store";
 
@@ -39,6 +41,12 @@ export default function App() {
               component={MainMenu}
             />
             <Stack.Screen
+              name="AdminScreen"
+              options={{ headerShown: false }}
+              component={Dashboard}
+            />
+
+            <Stack.Screen
               name="RentScreen"
               options={{ headerShown: false }}
               component={RentMenu}
@@ -46,7 +54,12 @@ export default function App() {
             <Stack.Screen
               name="ResultsScreen"
               options={{ headerShown: false }}
-              component={Results}
+              component={CardScreen}
+            />
+            <Stack.Screen
+              name="LoginScreen"
+              options={{ headerShown: false }}
+              component={Login}
             />
           </Stack.Navigator>
         </NavigationContainer>

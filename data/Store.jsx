@@ -1,10 +1,10 @@
 import React, { useReducer } from "react";
 
-import { predefinedState } from "./predefinedState";
+import predefinedState from "./predefinedState";
 
 const initialState = predefinedState;
 
-function storeReducer(state = initialState, action) {
+function storeReducer(state, action) {
   switch (action.type) {
     case "ADD_NEW_ITEM":
       return { ...state, rentItems: [...state.rentItems, action.payload] };
@@ -55,7 +55,15 @@ function storeReducer(state = initialState, action) {
       ].time.minutes = action.payload.minutes;
       return newState;
     }
+    case "UPDATE_ITEM_STATUS": {
+      let newState = { ...state };
+      newState.rentItems[action.payload.itemIndex].bookings[
+        action.payload.bookingIndex
+      ].completed = true;
+      return newState;
+    }
     case "CANCEL_REGIST": {
+      console.log(predefinedState);
       return initialState;
     }
     case "NEW_REGIST": {

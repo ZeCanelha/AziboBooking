@@ -1,4 +1,4 @@
-export const predefinedState = {
+const predefinedState = {
   rentItems: [
     {
       id: Math.random(Math.floor(1 + 100) * 100 - 1),
@@ -81,3 +81,5 @@ export const predefinedState = {
   ],
   seessionActive: false,
 };
+
+export default predefinedState;
