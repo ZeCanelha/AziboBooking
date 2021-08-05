@@ -2,73 +2,76 @@ import React, { useReducer } from "react";
 
 import predefinedState from "./predefinedState";
 
+import produce from "immer";
+
 const initialState = predefinedState;
 
 function storeReducer(state, action) {
   switch (action.type) {
     case "ADD_NEW_ITEM":
-      return { ...state, rentItems: [...state.rentItems, action.payload] };
+      return produce(state, (draft) => {
+        draft.rentItems.push(action.payload);
+      });
     case "ADD_NEW_BOOKING":
-      let newState = { ...state };
-
-      newState.rentItems[action.payload.index].bookings.push(
-        action.payload.booking
-      );
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.index].bookings.push(
+          action.payload.booking
+        );
+      });
     case "UPDATE_ITEM_NAME": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.index].name = action.payload.name;
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.index].name = action.payload.name;
+      });
     }
     case "UPDATE_ITEM_PRICE": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.index].price = action.payload.price;
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.index].price = action.payload.price;
+      });
     }
     case "CANCEL_ITEM_ENTRY": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.index].bookings.splice(
-        action.payload.bookingIndex,
-        1
-      );
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.index].bookings.splice(
+          action.payload.bookingIndex,
+          1
+        );
+      });
     }
 
     case "UPDATE_ITEM_DURATION": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.itemIndex].bookings[
-        action.payload.bookingIndex
-      ].duration = action.payload.duration;
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.itemIndex].bookings[
+          action.payload.bookingIndex
+        ].duration = action.payload.duration;
+      });
     }
     case "UPDATE_ITEM_HOUR": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.itemIndex].bookings[
-        action.payload.bookingIndex
-      ].time.hours = action.payload.hours;
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.itemIndex].bookings[
+          action.payload.bookingIndex
+        ].time.hours = action.payload.hours;
+      });
     }
     case "UPDATE_ITEM_MINUTE": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.itemIndex].bookings[
-        action.payload.bookingIndex
-      ].time.minutes = action.payload.minutes;
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.itemIndex].bookings[
+          action.payload.bookingIndex
+        ].time.minutes = action.payload.minutes;
+      });
     }
+
     case "UPDATE_ITEM_STATUS": {
-      let newState = { ...state };
-      newState.rentItems[action.payload.itemIndex].bookings[
-        action.payload.bookingIndex
-      ].completed = true;
-      return newState;
+      return produce(state, (draft) => {
+        draft.rentItems[action.payload.itemIndex].bookings[
+          action.payload.bookingIndex
+        ].completed = true;
+      });
     }
     case "CANCEL_REGIST": {
-      return (state = initialState);
+      return initialState;
     }
     case "NEW_REGIST": {
       return { ...state, seessionActive: true };
     }
-
     default:
       return state;
   }
