@@ -9,8 +9,9 @@ import {
   StyleSheet,
   ActivityIndicator,
   ToastAndroid,
-  Platform,
 } from "react-native";
+
+import { baseURL } from "../../config/urls";
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ const Login = ({ navigation }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/user/login", {
+      const response = await fetch(baseURL + "/user/login", {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -11,7 +11,7 @@ import Header from "../layout/Header";
 
 import { FontAwesome } from "@expo/vector-icons";
 
-const URL = "http://192.168.1.103:3000/bookings";
+import { baseURL } from "../../config/urls";
 
 const Card = ({ item, onPress }) => {
   return (
@@ -51,7 +51,7 @@ const Dashboard = ({ navigation }) => {
     if (!URL) return;
     const fetchData = async () => {
       try {
-        const response = await fetch(URL);
+        const response = await fetch(baseURL + "\bookings");
         const data = await response.json();
         setData(data);
       } catch (error) {
