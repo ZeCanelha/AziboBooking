@@ -80,7 +80,6 @@ const predefinedState = {
       bookings: [],
     },
   ],
-  seessionActive: false,
 };
 
 export default predefinedState;

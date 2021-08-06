@@ -16,27 +16,28 @@ import { cancelRegist } from "../../data/actions/rentActions";
 
 import { AppContext } from "../../data/Store";
 
-const URL = "http://192.168.1.103:3000/bookings";
+import { baseURL } from "../../config/urls";
 
 const Header = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const postFailed = () => {
-    ToastAndroid.show(
-      "Não foi possível enviar os resultados!",
-      ToastAndroid.SHORT
-    );
+    // ToastAndroid.show(
+    //   "Não foi possível enviar os resultados!",
+    //   ToastAndroid.SHORT
+    // );
   };
 
   const { state } = useContext(AppContext);
 
   const concludeAndNavigate = () => {
     setLoading(true);
+    console.log(state);
     axios
-      .post(URL, state)
+      .post(baseURL + "/bookings", state)
       .then((response) => {
-        if (response === 201) {
+        if (response.status === 201) {
           setLoading(false);
           setModalVisible(!modalVisible);
           props.dispatch(cancelRegist());
@@ -46,6 +47,7 @@ const Header = (props) => {
         }
       })
       .catch((error) => {
+        console.log(error);
         setLoading(false);
         setModalVisible(!modalVisible);
         postFailed();
