@@ -40,16 +40,17 @@ export default function App() {
               options={{ headerShown: false }}
               component={MainMenu}
             />
-            <Stack.Screen
-              name="AdminScreen"
-              options={{ headerShown: false }}
-              component={Dashboard}
-            />
 
             <Stack.Screen
               name="RentScreen"
               options={{ headerShown: false }}
               component={RentMenu}
+            />
+
+            <Stack.Screen
+              name="AdminScreen"
+              options={{ headerShown: false }}
+              component={Dashboard}
             />
             <Stack.Screen
               name="ResultsScreen"

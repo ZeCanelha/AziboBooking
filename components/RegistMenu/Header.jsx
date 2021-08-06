@@ -1,22 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
   Modal,
+  ActivityIndicator,
+  ToastAndroid,
   Pressable,
+  Image,
 } from "react-native";
 
 import { cancelRegist } from "../../data/actions/rentActions";
 
+import { AppContext } from "../../data/Store";
+
+const URL = "http://192.168.1.103:3000/bookings";
+
 const Header = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const postFailed = () => {
+    ToastAndroid.show(
+      "Não foi possível enviar os resultados!",
+      ToastAndroid.SHORT
+    );
+  };
+
+  const { state } = useContext(AppContext);
 
   const concludeAndNavigate = () => {
-    setModalVisible(!modalVisible);
-    props.dispatch(cancelRegist());
-    props.navigation.navigate("MainScreen");
+    setLoading(true);
+    axios
+      .post(URL, state)
+      .then((response) => {
+        if (response === 201) {
+          setLoading(false);
+          setModalVisible(!modalVisible);
+          props.dispatch(cancelRegist());
+          props.navigation.navigate("MainScreen");
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        setModalVisible(!modalVisible);
+        postFailed();
+      })
+      .finally(() => {
+        setLoading(false);
+        setModalVisible(!modalVisible);
+      });
   };
 
   return (
@@ -43,13 +80,21 @@ const Header = (props) => {
               style={[styles.button]}
               onPress={() => concludeAndNavigate()}
             >
-              <Text style={[styles.textStyle, styles.buttonClose]}>Sim</Text>
+              {loading ? (
+                <ActivityIndicator size="large" color="#FFF" />
+              ) : (
+                <Text style={[styles.textStyle, styles.buttonClose]}>Sim</Text>
+              )}
             </Pressable>
           </View>
         </View>
       </Modal>
       <View style={styles.headerContainer}>
-        <View>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Image
+            source={require("../../assets/TAIcon.png")}
+            style={{ width: 50, height: 50, padding: 5 }}
+          ></Image>
           <Text style={styles.textHeader}>Tour</Text>
           <Text style={[styles.textHeader, styles.textHeaderInverse]}>
             Azibo
@@ -75,11 +120,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 5,
+    paddingVertical: 5,
     borderBottomWidth: 2,
-    borderColor: "#486B73",
+    borderColor: "#6cafb5",
   },
   buttonPrimary: {
-    color: "#3CA7E2",
+    color: "#6cafb5",
     fontFamily: "Roboto_500Medium",
     fontSize: 20,
     textTransform: "uppercase",

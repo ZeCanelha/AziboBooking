@@ -1,5 +1,6 @@
 const predefinedState = {
-  rentItems: [
+  name: `Registo do dia ${new Date().getDay()}/${new Date().getMonth()}`,
+  bookings: [
     {
       id: Math.random(Math.floor(1 + 100) * 100 - 1),
       name: "Vermelha 1",

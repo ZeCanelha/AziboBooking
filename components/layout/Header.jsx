@@ -1,11 +1,15 @@
 import React from "react";
 
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
 const Header = (props) => {
   return (
     <View style={styles.headerContainer}>
-      <View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Image
+          source={require("../../assets/TAIcon.png")}
+          style={{ width: 50, height: 50, padding: 5 }}
+        ></Image>
         <Text style={styles.textHeader}>Tour</Text>
         <Text style={[styles.textHeader, styles.textHeaderInverse]}>Azibo</Text>
       </View>
@@ -24,15 +28,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingRight: 10,
-    paddingLeft: 10,
-    paddingBottom: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
     borderBottomWidth: 2,
-    borderColor: "#486B73",
+    borderBottomWidth: 2,
+    borderColor: "#6cafb5",
   },
 
   buttonPrimary: {
-    color: "#3CA7E2",
+    color: "#6cafb5",
     fontFamily: "Roboto_500Medium",
     fontSize: 20,
     textTransform: "uppercase",

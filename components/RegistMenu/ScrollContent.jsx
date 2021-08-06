@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ScrollView, StyleSheet, Text, TextInput } from "react-native";
 import ItemAdd from "./ItemAdd";
+
+import { AppContext } from "../../data/Store";
+
 const EntryContent = (props) => {
   const [notes, setNotes] = useState("");
+  const { state } = useContext(AppContext);
   return (
     <ScrollView style={styles.bodyContainer}>
-      <Text style={styles.noteTitle}>Registo do dia</Text>
+      <Text style={styles.noteTitle}>{state.name}</Text>
       <TextInput
         placeholder={"Notas do dia"}
         onChangeText={(text) => setNotes(text)}

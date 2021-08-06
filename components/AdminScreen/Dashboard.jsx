@@ -11,14 +11,14 @@ import Header from "../layout/Header";
 
 import { FontAwesome } from "@expo/vector-icons";
 
-const URL = "http://localhost:3000/bookings";
+const URL = "http://192.168.1.103:3000/bookings";
 
 const Card = ({ item, onPress }) => {
   return (
     <View style={styles.cardContainer}>
       <Text style={styles.cardText}>{item.name}</Text>
       <TouchableOpacity onPress={onPress}>
-        <FontAwesome name="chevron-right" size={24} color="#C1CECF" />
+        <FontAwesome name="chevron-right" size={24} color="#29767D" />
       </TouchableOpacity>
     </View>
   );
@@ -53,7 +53,6 @@ const Dashboard = ({ navigation }) => {
       try {
         const response = await fetch(URL);
         const data = await response.json();
-        console.log(data);
         setData(data);
       } catch (error) {
         setData(error);
@@ -101,10 +100,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 20,
-    backgroundColor: "#C1CECF9E",
+    backgroundColor: "#D3EEF1",
     borderWidth: 2,
-    borderRadius: 15,
-    borderColor: "#C1CECF",
+    borderRadius: 10,
+    borderColor: "#9FD2D7",
     flex: 1,
   },
   cardText: {

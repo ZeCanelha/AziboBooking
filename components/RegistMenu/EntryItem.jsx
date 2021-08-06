@@ -46,7 +46,9 @@ const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
         } `;
       }
     } else {
-      return `${(parseInt(hours) || 0) + (parseInt(duration) || 0)}:${minutes}`;
+      return `${
+        ((parseInt(hours) || 0) + (parseInt(duration) || 0)) % 24
+      }:${minutes}`;
     }
   };
 

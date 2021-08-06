@@ -20,7 +20,9 @@ const CardScreen = ({ route, navigation }) => {
   const calculateIncome = (bookings, price) => {
     let totalIncome = 0;
     bookings.forEach((book) => {
-      totalIncome += parseInt(book.duration) * parseInt(price);
+      if (book.duration === "30" || book.duratio === "0.5" || book.duration < 1)
+        totalIncome += 0.5 * parseInt(price);
+      else totalIncome += parseInt(book.duration) * parseInt(price);
     });
     totalAcumulative += totalIncome;
 
@@ -46,18 +48,20 @@ const CardScreen = ({ route, navigation }) => {
       <Header navigate={navigate} buttonText={"Voltar"}></Header>
       <View style={styles.resultsContainer}>
         <Text style={styles.textHeaderResults}>{name}</Text>
-        <View>
+        <ScrollView>
           <View style={styles.displayBox}>
             <Text style={styles.textHeaderTitle}>Gaivota</Text>
             <Text style={styles.textHeaderTitle}>Nº Saídas</Text>
             <Text style={styles.textHeaderTitle}>Total</Text>
           </View>
           <ScrollView>{mapResults()}</ScrollView>
-        </View>
-        <View style={styles.displayBox}>
-          <Text style={styles.textHeaderResults}>Total:</Text>
-          <Text style={styles.textHeaderResults}>{totalAcumulative + "€"}</Text>
-        </View>
+          <View style={styles.displayBox}>
+            <Text style={styles.textHeaderResults}>Total:</Text>
+            <Text style={styles.textHeaderResults}>
+              {totalAcumulative + "€"}
+            </Text>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -101,6 +105,8 @@ const styles = StyleSheet.create({
   displayBox: {
     flexDirection: "row",
     justifyContent: "space-evenly",
+    borderBottomColor: "#6cafb5",
+    borderBottomWidth: 1,
     flex: 1,
     padding: 5,
   },

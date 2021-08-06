@@ -48,6 +48,7 @@ const Login = ({ navigation }) => {
       }
     } catch (error) {
       console.log(error);
+      logginFailed();
     } finally {
       setLoading(false);
       setLoggedIn(false);
@@ -82,14 +83,14 @@ const Login = ({ navigation }) => {
               <Text style={styles.text}>Login</Text>
             </TouchableOpacity>
           )}
-
+          {/* 
           {Platform.OS && loggedIn ? null : (
             <Text
               style={{ fontWeight: "bold", marginVertical: 10, color: "red" }}
             >
               Autenticação falhada!
             </Text>
-          )}
+          )} */}
         </View>
       </ImageBackground>
     </View>
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#486B73",
+    backgroundColor: "#6cafb5",
     padding: 15,
     borderRadius: 5,
   },

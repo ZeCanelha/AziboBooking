@@ -14,7 +14,7 @@ const RentMenu = ({ navigation }) => {
 
   // Renderizar os barcos alugados + titulo
   const renderItems = () => {
-    return state.rentItems.map((item, index) => {
+    return state.bookings.map((item, index) => {
       return (
         <View key={item.id}>
           <EntryHeader

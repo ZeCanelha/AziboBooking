@@ -6,13 +6,14 @@ import {
   View,
   StyleSheet,
   ImageBackground,
+  Image,
 } from "react-native";
 
 import { AppContext } from "../../data/Store";
 import { newRegist } from "../../data/actions/rentActions";
 
 const MainMenu = ({ navigation }) => {
-  const { state, dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   const navigateToLoginScreen = () => {
     navigation.navigate("LoginScreen");
@@ -25,29 +26,32 @@ const MainMenu = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <ImageBackground
-          source={require("../../assets/azibo_bg.jpeg")}
-          resizeMode={"cover"}
-          style={styles.imageStyle}
-        ></ImageBackground>
-      </View>
-      <View style={styles.navigationContainer}>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonInverse]}
-          onPress={() => navigateToLoginScreen()}
-        >
-          <Text style={[styles.text, styles.textInverse]}>Histórico</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigateToRentScreen()}
-        >
-          <Text style={styles.text}>
-            {state.sessionActive ? "Continuar" : "Registo"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <ImageBackground
+        source={require("../../assets/azibo_bg.jpeg")}
+        resizeMode={"cover"}
+        style={styles.imageStyle}
+      >
+        <View style={styles.iconStlye}>
+          <Image
+            style={{ width: 200, height: 200 }}
+            source={require("../../assets/TAIcon.png")}
+          ></Image>
+        </View>
+        <View style={styles.navigationContainer}>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonInverse]}
+            onPress={() => navigateToLoginScreen()}
+          >
+            <Text style={[styles.text, styles.textInverse]}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigateToRentScreen()}
+          >
+            <Text style={styles.text}>Registo</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -56,23 +60,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  imageContainer: {
-    flex: 4.5,
+  iconStlye: {
+    alignSelf: "center",
+    transform: [{ translateY: -250 }],
   },
   imageStyle: {
     flex: 1,
-    width: "100%",
-    height: "100%",
+    justifyContent: "flex-end",
   },
   navigationContainer: {
-    flex: 1,
+    height: "15%",
+    padding: 10,
+    backgroundColor: "#FFF",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#486B73",
+    backgroundColor: "#6cafb5",
     padding: 15,
     borderRadius: 5,
     width: "40%",
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
   buttonInverse: {
     backgroundColor: "#fff",
     borderWidth: 2,
-    borderColor: "#486B73",
+    borderColor: "#6cafb5",
   },
   text: {
     fontSize: 16,
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   textInverse: {
-    color: "#486B73",
+    color: "#6cafb5",
   },
 });
 
