@@ -9,6 +9,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   ToastAndroid,
+  Image,
 } from "react-native";
 
 import { baseURL } from "../../config/urls";
@@ -64,6 +65,13 @@ const Login = ({ navigation }) => {
         resizeMode="cover"
       >
         <View style={styles.loginContainer}>
+          <View style={styles.iconStlye}>
+            <Image
+              style={{ width: 200, height: 200 }}
+              source={require("../../assets/TAIcon.png")}
+            ></Image>
+          </View>
+
           <TextInput
             placeholder={"Username"}
             style={styles.input}
@@ -107,27 +115,33 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   loginContainer: {
-    width: "90%",
     justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "90%",
+  },
+  iconStlye: {
+    alignSelf: "center",
+    marginBottom: 30,
   },
   input: {
     borderBottomWidth: 2,
     borderBottomColor: "#486B73",
     borderRadius: 5,
-    padding: 10,
+    padding: 15,
     fontSize: 16,
     fontFamily: "Roboto_500Medium",
     marginBottom: 10,
     color: "#486B73",
     backgroundColor: "#FFF",
+    width: "70%",
   },
   button: {
     alignItems: "center",
     backgroundColor: "#6cafb5",
     padding: 15,
     borderRadius: 5,
+    width: "70%",
   },
   text: {
     fontSize: 16,

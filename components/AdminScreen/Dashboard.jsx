@@ -48,10 +48,9 @@ const Dashboard = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (!URL) return;
     const fetchData = async () => {
       try {
-        const response = await fetch(baseURL + "\bookings");
+        const response = await fetch(baseURL + "/bookings");
         const data = await response.json();
         setData(data);
       } catch (error) {
