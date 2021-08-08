@@ -23,17 +23,16 @@ const Header = (props) => {
   const [loading, setLoading] = useState(false);
 
   const postFailed = () => {
-    // ToastAndroid.show(
-    //   "Não foi possível enviar os resultados!",
-    //   ToastAndroid.SHORT
-    // );
+    ToastAndroid.show(
+      "Não foi possível enviar os resultados!",
+      ToastAndroid.SHORT
+    );
   };
 
   const { state } = useContext(AppContext);
 
   const concludeAndNavigate = () => {
     setLoading(true);
-    console.log(state);
     axios
       .post(baseURL + "/bookings", state)
       .then((response) => {

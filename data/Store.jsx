@@ -12,6 +12,10 @@ function storeReducer(state, action) {
       return produce(state, (draft) => {
         draft.bookings.push(action.payload);
       });
+    case "UPDATE_NOTES_TEXT":
+      return produce(state, (draft) => {
+        draft.notes = action.payload;
+      });
     case "ADD_NEW_BOOKING":
       return produce(state, (draft) => {
         draft.bookings[action.payload.index].bookings.push(

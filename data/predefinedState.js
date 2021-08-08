@@ -1,7 +1,6 @@
 const predefinedState = {
-  name: `Registo do dia ${new Date().getDay() + 1}/${
-    new Date().getMonth() + 1
-  }`,
+  name: `Registo do dia ${new Date().getDate()}/${new Date().getMonth() + 1}`,
+  notes: "Notas do dia",
   bookings: [
     {
       id: Math.random(Math.floor(1 + 100) * 100 - 1),

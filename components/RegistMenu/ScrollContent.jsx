@@ -1,18 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ScrollView, StyleSheet, Text, TextInput } from "react-native";
 import ItemAdd from "./ItemAdd";
 
 import { AppContext } from "../../data/Store";
+import { updateNotesText } from "../../data/actions/rentActions";
 
 const EntryContent = (props) => {
-  const [notes, setNotes] = useState("");
-  const { state } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
   return (
     <ScrollView style={styles.bodyContainer}>
       <Text style={styles.noteTitle}>{state.name}</Text>
       <TextInput
         placeholder={"Notas do dia"}
-        onChangeText={(text) => setNotes(text)}
+        value={state.notes}
+        multiline={true}
+        onChangeText={(text) => dispatch(updateNotesText(text))}
         style={styles.textInput}
       ></TextInput>
       {props.children}
@@ -38,7 +40,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: "#C1CECF",
-    color: "#fff",
+    color: "#5D8E92",
+    fontSize: 16,
+    textAlignVertical: "top",
   },
 });
 

@@ -12,6 +12,13 @@ export function addNewItem() {
   };
 }
 
+export function updateNotesText(text) {
+  return {
+    type: "UPDATE_NOTES_TEXT",
+    payload: text,
+  };
+}
+
 export function addNewBooking(index) {
   let minutes = new Date().getMinutes().toString();
   let min = "0";

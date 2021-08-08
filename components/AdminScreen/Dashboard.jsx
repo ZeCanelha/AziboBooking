@@ -31,10 +31,11 @@ const Dashboard = ({ navigation }) => {
     navigation.navigate("MainScreen");
   };
 
-  const openRegist = (name, bookings) => {
+  const openRegist = (name, bookings, notes) => {
     navigation.navigate("ResultsScreen", {
       bookings,
       name,
+      notes,
     });
   };
 
@@ -42,7 +43,7 @@ const Dashboard = ({ navigation }) => {
     return (
       <Card
         item={item}
-        onPress={() => openRegist(item.name, item.bookings)}
+        onPress={() => openRegist(item.name, item.bookings, item.notes)}
       ></Card>
     );
   };

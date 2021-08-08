@@ -9,7 +9,7 @@ import {
 import Header from "../layout/Header";
 
 const CardScreen = ({ route, navigation }) => {
-  const { bookings, name } = route.params;
+  const { bookings, name, notes } = route.params;
 
   const navigate = () => {
     navigation.navigate("AdminScreen");
@@ -20,7 +20,11 @@ const CardScreen = ({ route, navigation }) => {
   const calculateIncome = (bookings, price) => {
     let totalIncome = 0;
     bookings.forEach((book) => {
-      if (book.duration === "30" || book.duratio === "0.5" || book.duration < 1)
+      if (
+        book.duration === "30" ||
+        book.duration === "0.5" ||
+        book.duration < 1
+      )
         totalIncome += 0.5 * parseInt(price);
       else totalIncome += parseInt(book.duration) * parseInt(price);
     });
@@ -48,7 +52,10 @@ const CardScreen = ({ route, navigation }) => {
       <Header navigate={navigate} buttonText={"Voltar"}></Header>
       <View style={styles.resultsContainer}>
         <Text style={styles.textHeaderResults}>{name}</Text>
+
         <ScrollView>
+          <Text style={styles.textNotesHeader}>Notas do dia:</Text>
+          <Text style={styles.textNotes}>{notes}</Text>
           <View style={styles.displayBox}>
             <Text style={styles.textHeaderTitle}>Gaivota</Text>
             <Text style={styles.textHeaderTitle}>Nº Saídas</Text>
@@ -83,6 +90,7 @@ const styles = StyleSheet.create({
     color: "#5D8E92B8",
     fontSize: 24,
     fontWeight: "bold",
+    textTransform: "uppercase",
     padding: 10,
   },
   textHeaderTitle: {
@@ -101,6 +109,23 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     textAlign: "center",
+  },
+  textNotesHeader: {
+    fontFamily: "Roboto_700Bold",
+    color: "#3CA7E2",
+    textTransform: "uppercase",
+    fontSize: 18,
+    paddingVertical: 5,
+    marginTop: 10,
+  },
+  textNotes: {
+    color: "#5D8E92",
+    fontSize: 15,
+    flex: 1,
+    padding: 5,
+    backgroundColor: "#6cafb558",
+    borderRadius: 5,
+    marginBottom: 10,
   },
   displayBox: {
     flexDirection: "row",

@@ -37,17 +37,17 @@ const RentMenu = ({ navigation }) => {
 
   const renderBookings = (bookings, itemIndex) => {
     return bookings.map((book, index) => {
-      // if (!book.completed) {
-      return (
-        <EntryItem
-          key={index}
-          itemIndex={itemIndex}
-          bookingIndex={index}
-          book={book}
-          dispatch={dispatch}
-        ></EntryItem>
-      );
-      // }
+      if (!book.completed) {
+        return (
+          <EntryItem
+            key={index}
+            itemIndex={itemIndex}
+            bookingIndex={index}
+            book={book}
+            dispatch={dispatch}
+          ></EntryItem>
+        );
+      }
     });
   };
 
