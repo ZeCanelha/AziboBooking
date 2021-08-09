@@ -20,13 +20,7 @@ const CardScreen = ({ route, navigation }) => {
   const calculateIncome = (bookings, price) => {
     let totalIncome = 0;
     bookings.forEach((book) => {
-      if (
-        book.duration === "30" ||
-        book.duration === "0.5" ||
-        book.duration < 1
-      )
-        totalIncome += 0.5 * parseInt(price);
-      else totalIncome += parseInt(book.duration) * parseInt(price);
+      totalIncome += parseFloat(book.duration) * parseInt(price);
     });
     totalAcumulative += totalIncome;
 
