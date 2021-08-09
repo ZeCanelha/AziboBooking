@@ -37,19 +37,32 @@ const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
     setModalVisible(!modalVisible);
   };
 
+  // const displayHours = (hours, minutes, duration) => {
+  //   if (duration < 1 || duration == "30") {
+  //     const durationInMinutes = 30;
+  //     if (minutes + durationInMinutes > 60) {
+  //       return `${parseInt(hours) + 1}:${
+  //         (parseInt(minutes) + durationInMinutes) % 60
+  //       } `;
+  //     }
+  //   } else {
+  //     return `${
+  //       ((parseInt(hours) || 0) + (parseInt(duration) || 0)) % 24
+  //     }:${minutes}`;
+  //   }
+  // };
+
   const displayHours = (hours, minutes, duration) => {
-    if (duration < 1 || duration == "30") {
-      const durationInMinutes = 30;
-      if (minutes + durationInMinutes > 60) {
-        return `${parseInt(hours) + 1}:${
-          (parseInt(minutes) + durationInMinutes) % 60
-        } `;
-      }
-    } else {
-      return `${
-        ((parseInt(hours) || 0) + (parseInt(duration) || 0)) % 24
-      }:${minutes}`;
-    }
+    const currentHoursToMins = parseInt(hours) * 60;
+    const inputTimeInMins = currentHoursToMins + parseInt(minutes);
+    const durationInMins = parseFloat(duration) * 60;
+    const totalTimeInMins = inputTimeInMins + durationInMins;
+
+    const chours = parseInt(totalTimeInMins / 60);
+
+    const cminutes = totalTimeInMins % 60;
+
+    return `${chours}:${cminutes}`;
   };
 
   const [modalVisible, setModalVisible] = useState(false);
