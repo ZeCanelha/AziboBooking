@@ -62,7 +62,9 @@ const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
 
     const cminutes = totalTimeInMins % 60;
 
-    return `${chours}:${cminutes}`;
+    return `${chours || hours}:${
+      cminutes < 10 ? "0" + cminutes : cminutes || 0
+    }`;
   };
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -102,9 +104,6 @@ const Item = ({ book, bookingIndex, itemIndex, dispatch }) => {
         onLongPress={() => setModalVisible(!modalVisible)}
       >
         <View style={styles.itemContainer}>
-          {/* <Text style={[styles.inputText, styles.textStyle]}>
-            {bookingIndex + 1}
-          </Text> */}
           <View
             style={[
               styles.inputText,

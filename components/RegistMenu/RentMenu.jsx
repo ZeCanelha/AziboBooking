@@ -16,7 +16,7 @@ const RentMenu = ({ navigation }) => {
   const renderItems = () => {
     return state.bookings.map((item, index) => {
       return (
-        <View key={item.id}>
+        <View style={styles.cardContainer} key={item.id}>
           <EntryHeader
             name={item.name}
             price={item.price}
@@ -64,6 +64,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
     fontFamily: "Roboto_400Regular",
+  },
+  cardContainer: {
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: "#29767D",
   },
   buttonNewEntry: { width: "100%", alignItems: "center", marginTop: 10 },
 });
