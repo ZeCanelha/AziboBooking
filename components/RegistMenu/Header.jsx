@@ -37,10 +37,10 @@ const Header = (props) => {
       .post(baseURL + "/bookings", state)
       .then((response) => {
         if (response.status === 201) {
-          setLoading(false);
-          setModalVisible(!modalVisible);
           props.dispatch(cancelRegist());
           props.navigation.navigate("MainScreen");
+          setLoading(false);
+          setModalVisible(!modalVisible);
         } else {
           throw new Error();
         }
@@ -48,8 +48,8 @@ const Header = (props) => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setModalVisible(!modalVisible);
         postFailed();
+        setModalVisible(!modalVisible);
       })
       .finally(() => {
         setLoading(false);

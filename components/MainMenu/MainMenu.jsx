@@ -20,7 +20,6 @@ const MainMenu = ({ navigation }) => {
   };
 
   const navigateToRentScreen = () => {
-    dispatch(newRegist());
     navigation.navigate("RentScreen");
   };
 

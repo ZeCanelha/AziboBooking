@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export function addNewItem() {
   const defaultState = {
     id: Math.random(Math.floor(1 + 100) * 100 - 1),
@@ -88,6 +90,9 @@ export function updateItemStatus(itemIndex, bookingIndex) {
 }
 
 export function cancelRegist() {
+  AsyncStorage.removeItem("@app_state").then((resp) =>
+    console.log("state removed")
+  );
   return {
     type: "CANCEL_REGIST",
   };
